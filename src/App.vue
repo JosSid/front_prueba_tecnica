@@ -1,19 +1,15 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-    <LoginForm />
-    <router-view />
+    <layout-app />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-import LoginForm from "./components/LoginForm.vue";
+import LayoutApp from "./components/LayoutApp.vue";
 export default {
   name: "App",
   components: {
-    HelloWorld,
-    LoginForm,
+    LayoutApp,
   },
 };
 </script>
