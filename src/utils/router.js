@@ -2,10 +2,10 @@ import Vue from "vue";
 import Router from "vue-router";
 
 //import App from "./App";
-import Home from "./components/HelloWorld.vue";
-import LoginForm from "./components/LoginForm.vue";
-import RegisterForm from "./components/RegisterForm.vue";
-import NotFound from "./components/NotFound.vue";
+import Home from "../components/HelloWorld.vue";
+import LoginForm from "../components/LoginForm.vue";
+import RegisterForm from "../components/RegisterForm.vue";
+import NotFound from "../components/NotFound.vue";
 
 Vue.use(Router);
 
