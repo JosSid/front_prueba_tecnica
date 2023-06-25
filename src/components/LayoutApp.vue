@@ -4,6 +4,7 @@
       <router-link class="link" to="/">Home</router-link> |
       <router-link class="link" to="/login">Login</router-link> |
       <router-link class="link" to="/register">Register</router-link>
+      <button v-on:click="logout" class="form-submit">Logout</button>
     </header>
     <main id="main">
       <router-view />
@@ -15,8 +16,16 @@
 </template>
 
 <script>
+import { logoutService } from "../api/service";
 export default {
   name: "LayuotApp",
+  methods: {
+    logout() {
+      logoutService();
+      const location = window.location.pathname;
+      location === "/login" ? location : this.$router.push("/login");
+    },
+  },
 };
 </script>
 
@@ -35,6 +44,17 @@ export default {
   text-decoration: none;
   font-size: 24px;
   color: aliceblue;
+}
+.form-submit {
+  background: #1ab188;
+  border: none;
+  color: white;
+  padding: 1rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.form-submit:hover {
+  background: #0b9185;
 }
 #footer {
   margin-top: 100px;

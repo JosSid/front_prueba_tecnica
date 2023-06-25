@@ -12,7 +12,7 @@ export const loginService = (credentials) => {
   });
 };
 
-export const logout = () => {
+export const logoutService = () => {
   return Promise.resolve().then(() => {
     removeAuthorizationHeader();
     storage.remove("auth");
