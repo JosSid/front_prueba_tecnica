@@ -76,6 +76,11 @@ export default {
   }),
   methods: {
     async register() {
+      this.error = false;
+      if (this.password !== this.passwordRepeat) {
+        this.error = "NO_MATCH_PASSWORDS";
+        return;
+      }
       const body = {};
       body.name = this.name;
       body.email = this.email;

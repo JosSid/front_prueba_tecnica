@@ -29,6 +29,8 @@
 
 <script>
 import { loginService } from "../api/service";
+import { mapMutations } from "vuex";
+import storage from "../utils/storage";
 export default {
   data: () => ({
     email: "",
@@ -36,12 +38,14 @@ export default {
     error: false,
   }),
   methods: {
+    ...mapMutations(["setLoggedIn"]),
     async login() {
       try {
         await loginService({
           email: this.email,
           password: this.password,
         });
+        this.setLoggedIn(storage.get("auth"));
         this.$router.push("/");
       } catch (error) {
         this.error = error.data.result;

@@ -2,9 +2,11 @@
   <div id="layout">
     <header id="header">
       <router-link class="link" to="/">Home</router-link> |
-      <router-link class="link" to="/login">Login</router-link> |
-      <router-link class="link" to="/register">Register</router-link>
-      <button v-on:click="logout" class="form-submit">Logout</button>
+      <router-link class="link" to="/register">Register</router-link> |
+      <router-link v-if="!isLoggedIn" class="link" to="/login"
+        >Login</router-link
+      >
+      <button v-else v-on:click="logout" class="form-submit">Logout</button>
     </header>
     <main id="main">
       <router-view />
@@ -17,11 +19,17 @@
 
 <script>
 import { logoutService } from "../api/service";
+import { mapState, mapMutations } from "vuex";
 export default {
   name: "LayuotApp",
+  computed: {
+    ...mapState(["isLoggedIn"]),
+  },
   methods: {
+    ...mapMutations(["setLoggedIn"]),
     logout() {
       logoutService();
+      this.setLoggedIn(false);
       const location = window.location.pathname;
       location === "/login" ? location : this.$router.push("/login");
     },
@@ -31,7 +39,7 @@ export default {
 
 <style scoped>
 #header {
-  background-color: blue;
+  background-color: rgb(35, 36, 31);
   min-height: 50px;
   display: flex;
   align-items: center;
@@ -58,7 +66,7 @@ export default {
 }
 #footer {
   margin-top: 100px;
-  background-color: blue;
+  background-color: rgb(35, 36, 31);
   color: aliceblue;
   min-height: 100px;
   display: flex;
