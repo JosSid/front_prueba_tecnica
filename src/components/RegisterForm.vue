@@ -28,6 +28,8 @@
         id="phone"
         required
         placeholder="Phone"
+        maxlength="9"
+        minlength="9"
       />
       <label class="form-label" for="password">Password:</label>
       <input
@@ -37,6 +39,7 @@
         id="password"
         required
         placeholder="Password"
+        minlength="8"
       />
       <label class="form-label" for="password-repeat">Repeat password:</label>
       <input
@@ -46,6 +49,7 @@
         id="password-repeat"
         required
         placeholder="Password"
+        minlength="8"
       />
       <p v-if="result" class="success">
         {{ "OK: " + this.result }}
@@ -154,9 +158,10 @@ export default {
 .form-submit {
   background: #1ab188;
   border: none;
+  border-radius: 10px;
   color: white;
-  margin-top: 3rem;
-  padding: 1rem 0;
+  margin: 20px;
+  padding: 1rem 20px;
   cursor: pointer;
   transition: background 0.2s;
 }

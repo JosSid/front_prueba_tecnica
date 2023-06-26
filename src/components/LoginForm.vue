@@ -96,9 +96,10 @@ export default {
 .form-submit {
   background: #1ab188;
   border: none;
+  border-radius: 10px;
   color: white;
-  margin-top: 3rem;
-  padding: 1rem 0;
+  margin: 20px;
+  padding: 1rem 20px;
   cursor: pointer;
   transition: background 0.2s;
 }

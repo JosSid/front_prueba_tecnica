@@ -18,8 +18,10 @@
           </tr>
         </tbody>
       </table>
-      <button @click="setShowForm">Actualizar</button>
-      <button @click="deleteUser(user._id)">Borrar</button>
+      <button class="form-submit" @click="setShowForm">Open Update Form</button>
+      <button class="form-delete" @click="deleteUser(user._id)">
+        Delete user
+      </button>
     </div>
     <div v-if="showForm" class="register">
       <h3 class="title">Update Form</h3>
@@ -48,6 +50,8 @@
           type="phone"
           id="phone"
           placeholder="Phone"
+          minlength="9"
+          maxlength="9"
         />
         <label class="form-label" for="password">Password:</label>
         <input
@@ -56,6 +60,7 @@
           type="password"
           id="password"
           placeholder="Password"
+          minlength="8"
         />
         <label class="form-label" for="password-repeat">Repeat password:</label>
         <input
@@ -64,6 +69,7 @@
           type="password"
           id="password-repeat"
           placeholder="Password"
+          minlength="8"
         />
         <p v-if="result" class="success">
           {{ "OK: " + this.result }}
@@ -85,7 +91,7 @@ const initialFormData = {
   password: "",
   passwordRepeat: "",
 };
-import { getUserById, deleteUserById } from "../api/service";
+import { getUserById, deleteUserById, updateUserById } from "../api/service";
 export default {
   data() {
     return {
@@ -105,6 +111,7 @@ export default {
       try {
         const user = await getUserById(this.id);
         this.user = user.user;
+        return user.user;
       } catch (error) {
         console.log(error);
       }
@@ -120,21 +127,36 @@ export default {
     async updateUser() {
       this.error = false;
       const bodyUpdater = {};
-      if (this.password !== this.passwordRepeat) {
-        this.error = "NO_MATCH_PASSWORDS";
-        return;
+      if (this.password) {
+        if (this.password !== this.passwordRepeat) {
+          this.error = "NO_MATCH_PASSWORDS";
+          return;
+        } else {
+          bodyUpdater.password = this.password;
+        }
       }
-      this.name ? (bodyUpdater.name = this.name) : bodyUpdater;
-      this.email ? (bodyUpdater.email = this.email) : bodyUpdater;
-      this.phone ? (bodyUpdater.phone = this.phone) : bodyUpdater;
-      this.password ? (bodyUpdater.password = this.password) : bodyUpdater;
-      this.passwordRepeat
-        ? (bodyUpdater.passwordRepeat = this.passwordRepeat)
-        : bodyUpdater;
+      this.name
+        ? (bodyUpdater.name = this.name)
+        : (bodyUpdater.name = this.user.name);
+      this.email
+        ? (bodyUpdater.email = this.email)
+        : (bodyUpdater.email = this.user.email);
+      this.phone
+        ? (bodyUpdater.phone = this.phone)
+        : (bodyUpdater.phone = this.user.phone);
       try {
-        console.log(bodyUpdater);
+        const updatedUser = await updateUserById(this.id, bodyUpdater);
+        this.result = updatedUser.result;
+        this.fetchUser();
+        setTimeout(() => {
+          this.result = false;
+          this.setShowForm();
+        }, 2000);
       } catch (error) {
-        console.log(error);
+        this.error = error.data.result;
+        setTimeout(() => {
+          this.error = false;
+        }, 2000);
       }
     },
     setShowForm() {
@@ -204,17 +226,25 @@ export default {
   outline: 0;
   border-color: #1ab188;
 }
-.form-submit {
+.form-submit,
+.form-delete {
   background: #1ab188;
   border: none;
+  border-radius: 10px;
   color: white;
-  margin-top: 3rem;
-  padding: 1rem 0;
+  margin: 20px;
+  padding: 1rem 20px;
   cursor: pointer;
   transition: background 0.2s;
 }
+.form-delete {
+  background-color: #de3b05;
+}
 .form-submit:hover {
   background: #0b9185;
+}
+.form-delete:hover {
+  background-color: #bf3204;
 }
 .success {
   margin: 1rem 0 0;
