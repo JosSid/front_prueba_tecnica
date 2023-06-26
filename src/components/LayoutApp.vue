@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { logoutService } from "../api/service";
+import { logoutUser } from "../api/service";
 import { mapState, mapMutations } from "vuex";
 export default {
   name: "LayuotApp",
@@ -28,7 +28,7 @@ export default {
   methods: {
     ...mapMutations(["setLoggedIn"]),
     logout() {
-      logoutService();
+      logoutUser();
       this.setLoggedIn(false);
       const location = window.location.pathname;
       location === "/login" ? location : this.$router.push("/login");

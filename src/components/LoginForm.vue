@@ -2,7 +2,7 @@
   <div class="login">
     <h1 class="title">Login in the page</h1>
     <form action class="form" @submit.prevent="login">
-      <label class="form-label" for="#email">Email:</label>
+      <label class="form-label" for="email">Email:</label>
       <input
         v-model="email"
         class="form-input"
@@ -11,7 +11,7 @@
         required
         placeholder="Email"
       />
-      <label class="form-label" for="#password">Password:</label>
+      <label class="form-label" for="password">Password:</label>
       <input
         v-model="password"
         class="form-input"
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { loginService } from "../api/service";
+import { loginUser } from "../api/service";
 import { mapMutations } from "vuex";
 import storage from "../utils/storage";
 export default {
@@ -41,7 +41,7 @@ export default {
     ...mapMutations(["setLoggedIn"]),
     async login() {
       try {
-        await loginService({
+        await loginUser({
           email: this.email,
           password: this.password,
         });
@@ -70,9 +70,8 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 20%;
-  min-width: 350px;
-  max-width: 100%;
+  width: 80%;
+  max-width: 350px;
   background: rgba(19, 35, 47, 0.9);
   border-radius: 5px;
   padding: 40px;
@@ -109,5 +108,12 @@ export default {
 .error {
   margin: 1rem 0 0;
   color: #ff4a96;
+}
+
+@media (max-width: 768px) {
+  .form {
+    width: 90%;
+    max-width: 100%;
+  }
 }
 </style>

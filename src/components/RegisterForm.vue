@@ -2,7 +2,7 @@
   <div class="register">
     <h1 class="title">Sign Up</h1>
     <form action class="form" @submit.prevent="register">
-      <label class="form-label" for="#name">Name:</label>
+      <label class="form-label" for="name">Name:</label>
       <input
         v-model="name"
         class="form-input"
@@ -11,7 +11,7 @@
         required
         placeholder="Name"
       />
-      <label class="form-label" for="#email">Email:</label>
+      <label class="form-label" for="email">Email:</label>
       <input
         v-model="email"
         class="form-input"
@@ -20,7 +20,7 @@
         required
         placeholder="Email"
       />
-      <label class="form-label" for="#phone">Phone:</label>
+      <label class="form-label" for="phone">Phone:</label>
       <input
         v-model="phone"
         class="form-input"
@@ -29,7 +29,7 @@
         required
         placeholder="Phone"
       />
-      <label class="form-label" for="#password">Password:</label>
+      <label class="form-label" for="password">Password:</label>
       <input
         v-model="password"
         class="form-input"
@@ -38,7 +38,7 @@
         required
         placeholder="Password"
       />
-      <label class="form-label" for="#password-repeat">Repeat password:</label>
+      <label class="form-label" for="password-repeat">Repeat password:</label>
       <input
         v-model="passwordRepeat"
         class="form-input"
@@ -59,7 +59,9 @@
 </template>
 
 <script>
-import { createService, loginService } from "../api/service";
+import { createUser, loginUser } from "../api/service";
+import { mapMutations } from "vuex";
+import storage from "../utils/storage";
 const initialFormData = {
   name: "",
   email: "",
@@ -75,6 +77,7 @@ export default {
     result: false,
   }),
   methods: {
+    ...mapMutations(["setLoggedIn"]),
     async register() {
       this.error = false;
       if (this.password !== this.passwordRepeat) {
@@ -87,14 +90,15 @@ export default {
       body.phone = this.phone;
       body.password = this.password;
       try {
-        const response = await createService(body);
+        const response = await createUser(body);
         if (response.result === "SUCCESS") {
           this.result = response.result;
         }
-        await loginService({
+        await loginUser({
           email: this.email,
           password: this.password,
         });
+        this.setLoggedIn(storage.get("auth"));
         setTimeout(() => {
           this.$router.push("/");
         }, 2000);
@@ -121,9 +125,8 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 20%;
-  min-width: 350px;
-  max-width: 100%;
+  width: 80%;
+  max-width: 350px;
   background: rgba(19, 35, 47, 0.9);
   border-radius: 5px;
   padding: 40px;
@@ -167,5 +170,12 @@ export default {
 .error {
   margin: 1rem 0 0;
   color: #ff4a96;
+}
+
+@media (max-width: 768px) {
+  .form {
+    width: 90%;
+    max-width: 100%;
+  }
 }
 </style>
