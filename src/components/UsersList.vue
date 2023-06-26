@@ -23,6 +23,9 @@
         </tr>
       </tbody>
     </table>
+    <p v-if="error" class="error">
+      {{ "Error: " + this.error }}
+    </p>
   </div>
 </template>
 
@@ -33,6 +36,7 @@ export default {
   data() {
     return {
       users: [],
+      error: false,
     };
   },
   computed: {
@@ -48,7 +52,7 @@ export default {
         const users = await getUsers();
         this.users = users.users.reverse();
       } catch (error) {
-        console.log(error);
+        this.error = error.message;
       }
     },
     updateUser(userId) {
@@ -107,5 +111,9 @@ export default {
 }
 .form-submit:hover {
   background: #0b9185;
+}
+.error {
+  margin: 1rem 0 0;
+  color: #ff4a96;
 }
 </style>
