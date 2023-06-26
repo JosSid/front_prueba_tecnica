@@ -1,8 +1,8 @@
 <template>
   <div id="layout">
     <header id="header">
-      <router-link class="link" to="/">Home</router-link> |
-      <router-link class="link" to="/register">Register</router-link> |
+      <router-link class="link" to="/">Users List</router-link> |
+      <router-link class="link" to="/register">Sign Up</router-link> |
       <router-link v-if="!isLoggedIn" class="link" to="/login"
         >Login</router-link
       >

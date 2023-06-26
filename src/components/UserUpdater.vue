@@ -111,9 +111,9 @@ export default {
       try {
         const user = await getUserById(this.id);
         this.user = user.user;
-        return user.user;
+        return this.user;
       } catch (error) {
-        console.log(error);
+        this.$router.push("/");
       }
     },
     async deleteUser(userId) {
