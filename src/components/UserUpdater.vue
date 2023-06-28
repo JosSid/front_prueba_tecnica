@@ -79,6 +79,11 @@
         </p>
         <input class="form-submit" type="submit" value="Update User" />
       </form>
+      <ConfirmComponent
+        :myTitle="title"
+        :myMessage="message"
+        :myCallBack="deleteUserCB"
+      />
     </div>
   </div>
 </template>
@@ -92,7 +97,11 @@ const initialFormData = {
   passwordRepeat: "",
 };
 import { getUserById, deleteUserById, updateUserById } from "../api/service";
+import ConfirmComponent from "@/components/ConfirmComponent.vue";
 export default {
+  components: {
+    ConfirmComponent,
+  },
   data() {
     return {
       ...initialFormData,
@@ -101,6 +110,8 @@ export default {
       showForm: false,
       result: false,
       error: false,
+      title: "Delete user",
+      message: "Are you sure for delete user ?",
     };
   },
   mounted() {
@@ -123,6 +134,9 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    deleteUserCB() {
+      this.deleteUser(this.user._id);
     },
     async updateUser() {
       this.error = false;
