@@ -19,9 +19,12 @@
         </tbody>
       </table>
       <button class="form-submit" @click="setShowForm">Open Update Form</button>
-      <button class="form-delete" @click="deleteUser(user._id)">
-        Delete user
-      </button>
+      <ConfirmComponent
+        :title="title"
+        :message="message"
+        :callBack="deleteUserCB"
+        :showButtonColor="'#ff0a5a'"
+      />
     </div>
     <div v-if="showForm" class="register">
       <h3 class="title">Update Form</h3>
@@ -79,11 +82,6 @@
         </p>
         <input class="form-submit" type="submit" value="Update User" />
       </form>
-      <ConfirmComponent
-        :myTitle="title"
-        :myMessage="message"
-        :myCallBack="deleteUserCB"
-      />
     </div>
   </div>
 </template>

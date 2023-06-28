@@ -1,10 +1,16 @@
 <template>
-  <div>
-    <button @click="openWindow" class="button">DeleteUser</button>
+  <div class="container">
+    <button
+      @click="openWindow"
+      class="button button-delete"
+      v-bind:style="{ backgroundColor: showButtonColor }"
+    >
+      {{ title }}
+    </button>
     <div v-if="showConfirm" class="notification-container">
       <div class="notification-body">
-        <p>{{ myTitle }}</p>
-        <p>{{ myMessage }}</p>
+        <p>CONFIRM {{ title }}</p>
+        <p>{{ message }}</p>
         <div>
           <button @click="cancel" type="button" class="button">
             NOT CONFIRM
@@ -19,7 +25,24 @@
 <script>
 export default {
   name: "ConfirmComponent",
-  props: ["myCallBack", "myMessage", "myTitle"],
+  props: {
+    callBack: {
+      type: Function,
+      required: true,
+    },
+    message: {
+      type: String,
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    showButtonColor: {
+      type: String,
+      default: "black",
+    },
+  },
   data() {
     return {
       showConfirm: false,
@@ -33,13 +56,16 @@ export default {
       this.showConfirm = false;
     },
     doTask() {
-      this.myCallBack();
+      this.callBack();
     },
   },
 };
 </script>
 
 <style>
+.container {
+  display: inline-block;
+}
 .button {
   background: #1ab188;
   border: none;
@@ -84,5 +110,8 @@ export default {
 }
 .button-delete {
   background-color: #de3b05;
+}
+.button-delete:hover {
+  background-color: #bf3204;
 }
 </style>
