@@ -1,8 +1,12 @@
 <template>
   <header id="header">
-    <router-link class="link" to="/">Users List</router-link> |
-    <router-link class="link" to="/register">Sign Up</router-link> |
-    <router-link v-if="!isLoggedIn" class="link" to="/login">Login</router-link>
+    <router-link v-if="isLoggedIn" class="link" to="/"
+      >Users List |
+    </router-link>
+    <router-link class="link" to="/register">Sign Up</router-link>
+    <router-link v-if="!isLoggedIn" class="link" to="/login">
+      | Login</router-link
+    >
     <button v-else v-on:click="logout" class="form-submit">Logout</button>
   </header>
 </template>
