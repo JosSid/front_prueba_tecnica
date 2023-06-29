@@ -23,6 +23,7 @@
         :title="title"
         :message="message"
         :callBack="deleteUserCB"
+        :showButtonColor="buttonColor"
       />
     </div>
     <div v-if="showForm" class="register">
