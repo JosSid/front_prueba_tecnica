@@ -46,6 +46,8 @@ export default {
   justify-content: center;
   gap: 10px;
   color: aliceblue;
+  position: sticky;
+  top: 0;
 }
 
 .link {
@@ -67,12 +69,14 @@ export default {
   background: #0b9185;
 }
 #footer {
-  margin-top: 100px;
   background-color: rgb(35, 36, 31);
   color: aliceblue;
-  min-height: 100px;
+  min-height: 50px;
+  min-width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: fixed;
+  bottom: 0;
 }
 </style>

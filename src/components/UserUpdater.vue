@@ -23,7 +23,6 @@
         :title="title"
         :message="message"
         :callBack="deleteUserCB"
-        :showButtonColor="'#ff0a5a'"
       />
     </div>
     <div v-if="showForm" class="register">
@@ -110,6 +109,7 @@ export default {
       error: false,
       title: "Delete user",
       message: "Are you sure for delete user ?",
+      buttonColor: "red",
     };
   },
   mounted() {

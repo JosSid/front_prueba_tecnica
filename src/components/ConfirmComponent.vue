@@ -2,8 +2,8 @@
   <div class="container">
     <button
       @click="openWindow"
-      class="button button-delete"
-      v-bind:style="{ backgroundColor: showButtonColor }"
+      class="button red"
+      v-bind:class="{ [showButtonColor]: true }"
     >
       {{ title }}
     </button>
@@ -12,10 +12,10 @@
         <p>CONFIRM {{ title }}</p>
         <p>{{ message }}</p>
         <div>
-          <button @click="cancel" type="button" class="button">
+          <button @click="cancel" type="button" class="button green">
             NOT CONFIRM
           </button>
-          <button class="button button-delete" @click="doTask">CONFIRM</button>
+          <button class="button red" @click="doTask">CONFIRM</button>
         </div>
       </div>
     </div>
@@ -40,7 +40,6 @@ export default {
     },
     showButtonColor: {
       type: String,
-      default: "black",
     },
   },
   data() {
@@ -67,7 +66,6 @@ export default {
   display: inline-block;
 }
 .button {
-  background: #1ab188;
   border: none;
   border-radius: 10px;
   color: white;
@@ -108,10 +106,28 @@ export default {
   font-size: 30px;
   margin-top: 70px;
 }
-.button-delete {
+.green {
+  background: #1ab188;
+}
+.green:hover {
+  background: #0b9185;
+}
+.red {
   background-color: #de3b05;
 }
-.button-delete:hover {
+.red:hover {
   background-color: #bf3204;
+}
+.blue {
+  background-color: #025add;
+}
+.blue:hover {
+  background-color: #0446a9;
+}
+.yellow {
+  background-color: #e9f013;
+}
+.yellow:hover {
+  background-color: #cad00d;
 }
 </style>
