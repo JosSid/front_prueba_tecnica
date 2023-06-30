@@ -110,7 +110,7 @@ export default {
       error: false,
       title: "Delete user",
       message: "Are you sure for delete user ?",
-      buttonColor: "red",
+      buttonColor: "blue",
     };
   },
   mounted() {

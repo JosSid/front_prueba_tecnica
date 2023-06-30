@@ -7,7 +7,7 @@
     <router-link v-if="!isLoggedIn" class="link" to="/login">
       | Login</router-link
     >
-    <button v-else v-on:click="logout" class="form-submit">Logout</button>
+    <button v-else v-on:click="logout" class="button">Logout</button>
   </header>
 </template>
 
@@ -50,8 +50,8 @@ export default {
   font-size: 24px;
   color: aliceblue;
 }
-.form-submit {
-  background: #1ab188;
+.button {
+  background-color: #1ab188;
   border: none;
   border-radius: 10px;
   color: white;
@@ -60,7 +60,7 @@ export default {
   cursor: pointer;
   transition: background 0.2s;
 }
-.form-submit:hover {
-  background: #0b9185;
+.button:hover {
+  background-color: #0b9185;
 }
 </style>
